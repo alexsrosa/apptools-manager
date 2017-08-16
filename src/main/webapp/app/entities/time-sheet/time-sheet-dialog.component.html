@@ -1,0 +1,193 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTimeSheetLabel">Create or edit a Time Sheet</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!timeSheet.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="timeSheet.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_matricula">Matricula</label>
+            <input type="number" class="form-control" name="matricula" id="field_matricula"
+                [(ngModel)]="timeSheet.matricula" required />
+            <div [hidden]="!(editForm.controls.matricula?.dirty && editForm.controls.matricula?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.matricula?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.matricula?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="field_nome"
+                [(ngModel)]="timeSheet.nome" required />
+            <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nome?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tarefa">Tarefa</label>
+            <input type="number" class="form-control" name="tarefa" id="field_tarefa"
+                [(ngModel)]="timeSheet.tarefa" required />
+            <div [hidden]="!(editForm.controls.tarefa?.dirty && editForm.controls.tarefa?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.tarefa?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.tarefa?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_descricao">Descricao</label>
+            <input type="text" class="form-control" name="descricao" id="field_descricao"
+                [(ngModel)]="timeSheet.descricao" required />
+            <div [hidden]="!(editForm.controls.descricao?.dirty && editForm.controls.descricao?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.descricao?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_codigofase">Codigofase</label>
+            <input type="number" class="form-control" name="codigofase" id="field_codigofase"
+                [(ngModel)]="timeSheet.codigofase" required />
+            <div [hidden]="!(editForm.controls.codigofase?.dirty && editForm.controls.codigofase?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.codigofase?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.codigofase?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_descricaofase">Descricaofase</label>
+            <input type="text" class="form-control" name="descricaofase" id="field_descricaofase"
+                [(ngModel)]="timeSheet.descricaofase" required />
+            <div [hidden]="!(editForm.controls.descricaofase?.dirty && editForm.controls.descricaofase?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.descricaofase?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_codigoatividade">Codigoatividade</label>
+            <input type="number" class="form-control" name="codigoatividade" id="field_codigoatividade"
+                [(ngModel)]="timeSheet.codigoatividade" required />
+            <div [hidden]="!(editForm.controls.codigoatividade?.dirty && editForm.controls.codigoatividade?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.codigoatividade?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.codigoatividade?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_descricaoatividade">Descricaoatividade</label>
+            <input type="text" class="form-control" name="descricaoatividade" id="field_descricaoatividade"
+                [(ngModel)]="timeSheet.descricaoatividade" required />
+            <div [hidden]="!(editForm.controls.descricaoatividade?.dirty && editForm.controls.descricaoatividade?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.descricaoatividade?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_data">Data</label>
+            <div class="input-group">
+                <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker  #dataDp="ngbDatepicker" [(ngModel)]="timeSheet.data"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dataDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.data?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_observacao">Observacao</label>
+            <input type="text" class="form-control" name="observacao" id="field_observacao"
+                [(ngModel)]="timeSheet.observacao"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_horas">Horas</label>
+            <input type="text" class="form-control" name="horas" id="field_horas"
+                [(ngModel)]="timeSheet.horas" required />
+            <div [hidden]="!(editForm.controls.horas?.dirty && editForm.controls.horas?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.horas?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_datainclusao">Datainclusao</label>
+            <div class="input-group">
+                <input id="field_datainclusao" type="text" class="form-control" name="datainclusao" ngbDatepicker  #datainclusaoDp="ngbDatepicker" [(ngModel)]="timeSheet.datainclusao"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="datainclusaoDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.datainclusao?.dirty && editForm.controls.datainclusao?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.datainclusao?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dataultimaatualizacao">Dataultimaatualizacao</label>
+            <div class="input-group">
+                <input id="field_dataultimaatualizacao" type="text" class="form-control" name="dataultimaatualizacao" ngbDatepicker  #dataultimaatualizacaoDp="ngbDatepicker" [(ngModel)]="timeSheet.dataultimaatualizacao"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dataultimaatualizacaoDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.dataultimaatualizacao?.dirty && editForm.controls.dataultimaatualizacao?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dataultimaatualizacao?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

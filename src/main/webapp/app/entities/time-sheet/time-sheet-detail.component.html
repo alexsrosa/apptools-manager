@@ -1,0 +1,39 @@
+
+<div *ngIf="timeSheet">
+    <h2><span>Time Sheet</span> #{{timeSheet.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nome</span></dt>
+        <dd><span>#{{timeSheet.matricula}} - {{timeSheet.nome}}</span></dd>
+        <dt><span>Tarefa</span></dt>
+        <dd><span>#{{timeSheet.tarefa}} - {{timeSheet.descricao}}</span></dd>
+        <dt><span>Fase</span></dt>
+        <dd><span>#{{timeSheet.codigofase}} - {{timeSheet.descricaofase}}</span></dd>
+        <dt><span>Atividade</span></dt>
+        <dd><span>#{{timeSheet.codigoatividade}} - {{timeSheet.descricaoatividade}}</span></dd>
+        <dt><span>Data</span></dt>
+        <dd><span>{{timeSheet.data | date:'mediumDate'}}</span></dd>
+        <dt><span>Observação</span></dt>
+        <dd><span>{{timeSheet.observacao}}</span></dd>
+        <dt><span>Horas</span></dt>
+        <dd><span>{{timeSheet.horas}}</span></dd>
+        <dt><span>Data inclusão</span></dt>
+        <dd><span>{{timeSheet.datainclusao | date:'mediumDate'}}</span></dd>
+        <dt><span>Data última atualização</span></dt>
+        <dd><span>{{timeSheet.dataultimaatualizacao | date:'mediumDate'}}</span></dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span></span>
+    </button>
+
+    <!--<button type="button"
+            [routerLink]="['/', { outlets: { popup: 'time-sheet/'+ timeSheet.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>-->
+</div>

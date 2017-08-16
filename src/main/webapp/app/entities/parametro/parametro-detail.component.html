@@ -1,0 +1,37 @@
+
+<div *ngIf="parametro">
+    <h2><span>Parametro</span> {{parametro.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nome</span></dt>
+        <dd>
+            <span>{{parametro.nome}}</span>
+        </dd>
+        <dt><span>Valor</span></dt>
+        <dd>
+            <span>{{parametro.valor}}</span>
+        </dd>
+        <dt><span>Datainclusao</span></dt>
+        <dd>
+            <span>{{parametro.datainclusao | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Dataultimaatualizacao</span></dt>
+        <dd>
+            <span>{{parametro.dataultimaatualizacao | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'parametro/'+ parametro.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
