@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.time.LocalDate;
+
 
 /**
  * Spring Data JPA repository for the TimeSheet entity.
@@ -15,5 +17,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface TimeSheetRepository extends JpaRepository<TimeSheet,Long> {
 
-    Page<TimeSheet> findByTarefa(Pageable pageable);
+    Page<TimeSheet> findByNomeAndTarefaAndDataBetween(Pageable pageable, String nome, String tarefa, LocalDate data1
+            , LocalDate data2);
 }

@@ -19,6 +19,11 @@ currentAccount: any;
     error: any;
     success: any;
     eventSubscriber: Subscription;
+    nomeSearch: string;
+    currentSearch: string;
+    tarefaSearch: string;
+    dataInicioSearch: string;
+    dataFimSearch: string;
     routeData: any;
     links: any;
     totalItems: any;
@@ -50,6 +55,24 @@ currentAccount: any;
     }
 
     loadAll() {
+
+        console.log(this.nomeSearch);
+        console.log(this.tarefaSearch);
+        console.log(this.dataInicioSearch);
+        console.log(this.dataFimSearch);
+        if (this.nomeSearch || this.tarefaSearch || this.dataInicioSearch || this.dataFimSearch) {
+            this.timeSheetService.search({
+                nome: this.nomeSearch,
+                tarefa: this.tarefaSearch,
+                dataInicio: this.dataInicioSearch,
+                dataFim: this.dataFimSearch,
+                size: this.itemsPerPage,
+                sort: this.sort()}).subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+            return;
+        }
         this.timeSheetService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
@@ -78,6 +101,25 @@ currentAccount: any;
     clear() {
         this.page = 0;
         this.router.navigate(['/time-sheet', {
+            page: this.page,
+            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+        }]);
+        this.loadAll();
+    }
+    search(nome, tarefa, dataInicio, dataFim) {
+        if (!(nome && tarefa && dataInicio && dataFim)) {
+            return this.clear();
+        }
+        this.page = 0;
+        this.nomeSearch = nome;
+        this.tarefaSearch = tarefa;
+        this.dataInicioSearch = dataInicio;
+        this.dataFimSearch = dataFim;
+        this.router.navigate(['/time-sheet', {
+            nome: this.nomeSearch,
+            tarefa: this.tarefaSearch,
+            dataInicio: this.dataInicioSearch,
+            dataFim: this.dataFimSearch,
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);

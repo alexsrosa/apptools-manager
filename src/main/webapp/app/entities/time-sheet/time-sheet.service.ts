@@ -39,22 +39,23 @@ export class TimeSheetService {
         });
     }
 
-    findTarefa(tarefa: number): Observable<TimeSheet> {
-        return this.http.get(`${this.resourceUrl}/${tarefa}`).map((res: Response) => {
-            const jsonResponse = res.json();
-            this.convertItemFromServer(jsonResponse);
-            return jsonResponse;
-        });
-    }
-
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
+        console.log('query');
+        console.log(options);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
+    }
+
+    search(req?: any): Observable<ResponseWrapper> {
+        const options = createRequestOption(req);
+        console.log('search');
+        return this.http.get(`${this.resourceUrl}/search/`, options)
+            .map((res: any) => this.convertResponse(res));
     }
 
     private convertResponse(res: Response): ResponseWrapper {

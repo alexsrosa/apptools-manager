@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,7 +93,7 @@ public class TimeSheetResource {
     @GetMapping("/time-sheets")
     @Timed
     public ResponseEntity<List<TimeSheet>> getAllTimeSheets(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of TimeSheets");
+        log.debug("REST request to get a page of TimeSheets 2233");
         Page<TimeSheet> page = timeSheetRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/time-sheets");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -127,17 +128,19 @@ public class TimeSheetResource {
     }
 
     /**
-     * GET  /time-sheets : get select the timeSheets.
+     * GET  /time-sheets/search : get select the timeSheets.
      *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of timeSheets in body
      */
-    @GetMapping("/time-sheets/{tarefa}")
+    @GetMapping("/time-sheets/search")
     @Timed
-    public ResponseEntity<List<TimeSheet>> getTimeSheetsByTarefa(@PathVariable Long id, @ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of TimeSheets");
-        Page<TimeSheet> page = timeSheetRepository.findByTarefa(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/time-sheets");
+    public ResponseEntity<List<TimeSheet>> search(@RequestParam String nome, @RequestParam String tarefa,
+                                                  @RequestParam String dataInicio, @RequestParam String dataFim, @ApiParam Pageable pageable) {
+        log.debug("REST request to get a page of TimeSheets search");
+        Page<TimeSheet> page = timeSheetRepository.findByNomeAndTarefaAndDataBetween(pageable, nome, tarefa
+                    , LocalDate.parse(dataInicio), LocalDate.parse(dataFim));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/time-sheets/search");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
