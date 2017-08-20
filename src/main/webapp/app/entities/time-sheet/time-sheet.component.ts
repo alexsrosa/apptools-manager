@@ -20,7 +20,6 @@ currentAccount: any;
     success: any;
     eventSubscriber: Subscription;
     nomeSearch: string;
-    currentSearch: string;
     tarefaSearch: string;
     dataInicioSearch: string;
     dataFimSearch: string;
@@ -55,17 +54,13 @@ currentAccount: any;
     }
 
     loadAll() {
-
-        console.log(this.nomeSearch);
-        console.log(this.tarefaSearch);
-        console.log(this.dataInicioSearch);
-        console.log(this.dataFimSearch);
         if (this.nomeSearch || this.tarefaSearch || this.dataInicioSearch || this.dataFimSearch) {
             this.timeSheetService.search({
                 nome: this.nomeSearch,
                 tarefa: this.tarefaSearch,
                 dataInicio: this.dataInicioSearch,
                 dataFim: this.dataFimSearch,
+                page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()}).subscribe(
                 (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
@@ -100,16 +95,16 @@ currentAccount: any;
 
     clear() {
         this.page = 0;
+        this.nomeSearch = '';
+        this.tarefaSearch = '';
+        this.dataInicioSearch = '';
+        this.dataFimSearch = '';
         this.router.navigate(['/time-sheet', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
-        this.loadAll();
     }
     search(nome, tarefa, dataInicio, dataFim) {
-        if (!(nome && tarefa && dataInicio && dataFim)) {
-            return this.clear();
-        }
         this.page = 0;
         this.nomeSearch = nome;
         this.tarefaSearch = tarefa;

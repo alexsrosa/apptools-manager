@@ -7,7 +7,6 @@ import { JhiPaginationUtil } from 'ng-jhipster';
 import { TimeSheetComponent } from './time-sheet.component';
 import { TimeSheetDetailComponent } from './time-sheet-detail.component';
 import { TimeSheetPopupComponent } from './time-sheet-dialog.component';
-import { TimeSheetDeletePopupComponent } from './time-sheet-delete-dialog.component';
 
 @Injectable()
 export class TimeSheetResolvePagingParams implements Resolve<any> {
@@ -39,7 +38,7 @@ export const timeSheetRoute: Routes = [
         canActivate: [UserRouteAccessService]
     }, {
         path: 'time-sheet/:id',
-        component: TimeSheetDetailComponent,
+        component: TimeSheetComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'TimeSheets'
@@ -49,8 +48,8 @@ export const timeSheetRoute: Routes = [
 ];
 
 export const timeSheetPopupRoute: Routes = [
-/*    {
-        path: 'time-sheet-new',
+    {
+        path: 'time-sheet/:id/view',
         component: TimeSheetPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -58,7 +57,7 @@ export const timeSheetPopupRoute: Routes = [
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
-    },*/
+    },
     {
         path: 'time-sheet/:id/edit',
         component: TimeSheetPopupComponent,
@@ -68,15 +67,5 @@ export const timeSheetPopupRoute: Routes = [
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
-    }/*,
-    {
-        path: 'time-sheet/:id/delete',
-        component: TimeSheetDeletePopupComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'TimeSheets'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    }*/
+    }
 ];

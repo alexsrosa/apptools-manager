@@ -41,21 +41,14 @@ export class TimeSheetService {
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
-        console.log('query');
-        console.log(options);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }
 
-    delete(id: number): Observable<Response> {
-        return this.http.delete(`${this.resourceUrl}/${id}`);
-    }
-
     search(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
-        console.log('search');
         return this.http.get(`${this.resourceUrl}/search/`, options)
-            .map((res: any) => this.convertResponse(res));
+            .map((res: Response) => this.convertResponse(res));
     }
 
     private convertResponse(res: Response): ResponseWrapper {

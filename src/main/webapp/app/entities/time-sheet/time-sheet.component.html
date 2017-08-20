@@ -6,15 +6,16 @@
     <div class="row">
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
+                <div class="w-100 mt-3">
                     <input type="text" class="form-control" [(ngModel)]="nomeSearch" id="nomeSearch" name="nomeSearch" placeholder="nome">
                     <input type="text" class="form-control" [(ngModel)]="tarefaSearch" id="tarefaSearch" name="tarefaSearch" placeholder="tarefa">
                     <input type="date" class="form-control" [(ngModel)]="dataInicioSearch" id="dataInicioSearch" name="dataInicioSearch" placeholder="data início">
                     <input type="date" class="form-control" [(ngModel)]="dataFimSearch" id="dataFimSearch" name="dataFimSearch" placeholder="data fim">
-                    <button class="input-group-addon btn btn-info" (click)="search(nomeSearch, tarefaSearch, dataInicioSearch, dataFimSearch)">
+
+                    <button class="btn btn-info" (click)="search(nomeSearch, tarefaSearch, dataInicioSearch, dataFimSearch)">
                         <span class="fa fa-search"></span>
                     </button>
-                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="nomeSearch || tarefaSearch">
+                    <button class="btn btn-danger" (click)="clear()" *ngIf="nomeSearch || tarefaSearch || dataInicioSearch || dataFimSearch">
                         <span class="fa fa-trash-o"></span>
                     </button>
                 </div>
@@ -40,7 +41,12 @@
             </thead>
             <tbody>
             <tr *ngFor="let timeSheet of timeSheets ;trackBy: trackId">
-                <td><a [routerLink]="['../time-sheet', timeSheet.id ]">{{timeSheet.id}}</a></td>
+                <td>
+                    <button type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'time-sheet/'+ timeSheet.id + '/view'} }]"
+                            replaceUrl="true"
+                            class="btn btn-primary btn-sm">{{timeSheet.id}}
+                    </button>
                 <td>#{{timeSheet.matricula}} - {{timeSheet.nome}}</td>
                 <td>{{timeSheet.tarefa}} - {{timeSheet.descricao}}</td>
                 <td>{{timeSheet.codigofase}} - {{timeSheet.descricaofase}}</td>
@@ -48,17 +54,6 @@
                 <td>{{timeSheet.data | date:'mediumDate'}}</td>
                 <td>{{timeSheet.observacao}}</td>
                 <td>{{timeSheet.horas}}</td>
-                <!--<td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'time-sheet/'+ timeSheet.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="hidden-md-down"></span>
-                        </button>
-                    </div>
-                </td>-->
             </tr>
             </tbody>
         </table>

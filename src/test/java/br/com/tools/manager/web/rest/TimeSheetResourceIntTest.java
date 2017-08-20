@@ -100,7 +100,7 @@ public class TimeSheetResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        TimeSheetResource timeSheetResource = new TimeSheetResource(timeSheetRepository);
+        TimeSheetResource timeSheetResource = new TimeSheetResource();
         this.restTimeSheetMockMvc = MockMvcBuilders.standaloneSetup(timeSheetResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
