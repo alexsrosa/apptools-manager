@@ -31,15 +31,6 @@ public class TimeSheetService {
 
     /**
      *
-     * @return
-     */
-    public List<TimeSheet> search(){
-
-        return null;
-    }
-
-    /**
-     *
      * @param timeSheet
      * @return
      */
@@ -90,8 +81,11 @@ public class TimeSheetService {
                 }
                 if(tarefa != null)
                     predicates.add(builder.like(root.get("tarefa").as(String.class), "%"+tarefa.toString().trim()+"%"));
-                if(dataInicio != null && dataFim != null)
+                if(dataInicio != null && dataFim != null){
                     predicates.add(builder.between(root.get("data"), LocalDate.parse(dataInicio), LocalDate.parse(dataFim)));
+                }else if (dataInicio != null){
+                    predicates.add(builder.equal(root.get("data"), LocalDate.parse(dataInicio)));
+                }
 
                 return builder.and(predicates.toArray(new Predicate[predicates.size()]));
             }

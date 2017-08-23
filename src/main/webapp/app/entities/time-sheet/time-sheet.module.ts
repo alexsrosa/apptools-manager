@@ -6,7 +6,6 @@ import {
     TimeSheetService,
     TimeSheetPopupService,
     TimeSheetComponent,
-    TimeSheetDetailComponent,
     TimeSheetDialogComponent,
     TimeSheetPopupComponent,
     timeSheetRoute,
@@ -26,7 +25,6 @@ const ENTITY_STATES = [
     ],
     declarations: [
         TimeSheetComponent,
-        TimeSheetDetailComponent,
         TimeSheetDialogComponent,
         TimeSheetPopupComponent,
     ],

@@ -5,7 +5,6 @@ import { UserRouteAccessService } from '../../shared';
 import { JhiPaginationUtil } from 'ng-jhipster';
 
 import { TimeSheetComponent } from './time-sheet.component';
-import { TimeSheetDetailComponent } from './time-sheet-detail.component';
 import { TimeSheetPopupComponent } from './time-sheet-dialog.component';
 
 @Injectable()
@@ -50,16 +49,6 @@ export const timeSheetRoute: Routes = [
 export const timeSheetPopupRoute: Routes = [
     {
         path: 'time-sheet/:id/view',
-        component: TimeSheetPopupComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'TimeSheets'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
-    {
-        path: 'time-sheet/:id/edit',
         component: TimeSheetPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
