@@ -1,0 +1,33 @@
+
+<div *ngIf="consultores">
+    <h2><span>Consultores</span> {{consultores.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Nome</span></dt>
+        <dd>
+            <span>{{consultores.nome}}</span>
+        </dd>
+        <dt><span>Dataprimeiroregistro</span></dt>
+        <dd>
+            <span>{{consultores.dataprimeiroregistro | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Dataultimoregistro</span></dt>
+        <dd>
+            <span>{{consultores.dataultimoregistro | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'consultores/'+ consultores.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

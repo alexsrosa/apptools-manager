@@ -7,21 +7,21 @@ import { Observable } from 'rxjs/Rx';
 import { JhiDateUtils, JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 import { ManagerTestModule } from '../../../test.module';
 import { MockActivatedRoute } from '../../../helpers/mock-route.service';
-import { TimeSheetDetailComponent } from '../../../../../../main/webapp/app/entities/time-sheet/time-sheet-detail.component';
-import { TimeSheetService } from '../../../../../../main/webapp/app/entities/time-sheet/time-sheet.service';
-import { TimeSheet } from '../../../../../../main/webapp/app/entities/time-sheet/time-sheet.model';
+import { ConsultoresDetailComponent } from '../../../../../../main/webapp/app/entities/consultores/consultores-detail.component';
+import { ConsultoresService } from '../../../../../../main/webapp/app/entities/consultores/consultores.service';
+import { Consultores } from '../../../../../../main/webapp/app/entities/consultores/consultores.model';
 
 describe('Component Tests', () => {
 
-    describe('TimeSheet Management Detail Component', () => {
-        let comp: TimeSheetDetailComponent;
-        let fixture: ComponentFixture<TimeSheetDetailComponent>;
-        let service: TimeSheetService;
+    describe('Consultores Management Detail Component', () => {
+        let comp: ConsultoresDetailComponent;
+        let fixture: ComponentFixture<ConsultoresDetailComponent>;
+        let service: ConsultoresService;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [ManagerTestModule],
-                declarations: [TimeSheetDetailComponent],
+                declarations: [ConsultoresDetailComponent],
                 providers: [
                     JhiDateUtils,
                     JhiDataUtils,
@@ -30,31 +30,31 @@ describe('Component Tests', () => {
                         provide: ActivatedRoute,
                         useValue: new MockActivatedRoute({id: 123})
                     },
-                    TimeSheetService,
+                    ConsultoresService,
                     JhiEventManager
                 ]
-            }).overrideTemplate(TimeSheetDetailComponent, '')
+            }).overrideTemplate(ConsultoresDetailComponent, '')
             .compileComponents();
         }));
 
         beforeEach(() => {
-            fixture = TestBed.createComponent(TimeSheetDetailComponent);
+            fixture = TestBed.createComponent(ConsultoresDetailComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(TimeSheetService);
+            service = fixture.debugElement.injector.get(ConsultoresService);
         });
 
         describe('OnInit', () => {
             it('Should call load all on init', () => {
             // GIVEN
 
-            spyOn(service, 'find').and.returnValue(Observable.of(new TimeSheet(10)));
+            spyOn(service, 'find').and.returnValue(Observable.of(new Consultores(10)));
 
             // WHEN
             comp.ngOnInit();
 
             // THEN
             expect(service.find).toHaveBeenCalledWith(123);
-            expect(comp.timeSheet).toEqual(jasmine.objectContaining({id: 10}));
+            expect(comp.consultores).toEqual(jasmine.objectContaining({id: 10}));
             });
         });
     });

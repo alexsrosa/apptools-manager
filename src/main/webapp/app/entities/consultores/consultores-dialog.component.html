@@ -1,0 +1,68 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myConsultoresLabel">Create or edit a Consultores</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!consultores.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="consultores.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="field_nome"
+                [(ngModel)]="consultores.nome" required />
+            <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nome?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dataprimeiroregistro">Dataprimeiroregistro</label>
+            <div class="input-group">
+                <input id="field_dataprimeiroregistro" type="text" class="form-control" name="dataprimeiroregistro" ngbDatepicker  #dataprimeiroregistroDp="ngbDatepicker" [(ngModel)]="consultores.dataprimeiroregistro"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dataprimeiroregistroDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.dataprimeiroregistro?.dirty && editForm.controls.dataprimeiroregistro?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dataprimeiroregistro?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dataultimoregistro">Dataultimoregistro</label>
+            <div class="input-group">
+                <input id="field_dataultimoregistro" type="text" class="form-control" name="dataultimoregistro" ngbDatepicker  #dataultimoregistroDp="ngbDatepicker" [(ngModel)]="consultores.dataultimoregistro"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="dataultimoregistroDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.dataultimoregistro?.dirty && editForm.controls.dataultimoregistro?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dataultimoregistro?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
