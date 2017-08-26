@@ -1,17 +1,17 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Consultores } from './consultores.model';
-import { ConsultoresService } from './consultores.service';
+import { Consultor } from './consultor.model';
+import { ConsultorService } from './consultor.service';
 
 @Injectable()
-export class ConsultoresPopupService {
+export class ConsultorPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
         private modalService: NgbModal,
         private router: Router,
-        private consultoresService: ConsultoresService
+        private consultorService: ConsultorService
 
     ) {
         this.ngbModalRef = null;
@@ -25,37 +25,37 @@ export class ConsultoresPopupService {
             }
 
             if (id) {
-                this.consultoresService.find(id).subscribe((consultores) => {
-                    if (consultores.dataprimeiroregistro) {
-                        consultores.dataprimeiroregistro = {
-                            year: consultores.dataprimeiroregistro.getFullYear(),
-                            month: consultores.dataprimeiroregistro.getMonth() + 1,
-                            day: consultores.dataprimeiroregistro.getDate()
+                this.consultorService.find(id).subscribe((consultor) => {
+                    if (consultor.dataprimeiroregistro) {
+                        consultor.dataprimeiroregistro = {
+                            year: consultor.dataprimeiroregistro.getFullYear(),
+                            month: consultor.dataprimeiroregistro.getMonth() + 1,
+                            day: consultor.dataprimeiroregistro.getDate()
                         };
                     }
-                    if (consultores.dataultimoregistro) {
-                        consultores.dataultimoregistro = {
-                            year: consultores.dataultimoregistro.getFullYear(),
-                            month: consultores.dataultimoregistro.getMonth() + 1,
-                            day: consultores.dataultimoregistro.getDate()
+                    if (consultor.dataultimoregistro) {
+                        consultor.dataultimoregistro = {
+                            year: consultor.dataultimoregistro.getFullYear(),
+                            month: consultor.dataultimoregistro.getMonth() + 1,
+                            day: consultor.dataultimoregistro.getDate()
                         };
                     }
-                    this.ngbModalRef = this.consultoresModalRef(component, consultores);
+                    this.ngbModalRef = this.consultorModalRef(component, consultor);
                     resolve(this.ngbModalRef);
                 });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
-                    this.ngbModalRef = this.consultoresModalRef(component, new Consultores());
+                    this.ngbModalRef = this.consultorModalRef(component, new Consultor());
                     resolve(this.ngbModalRef);
                 }, 0);
             }
         });
     }
 
-    consultoresModalRef(component: Component, consultores: Consultores): NgbModalRef {
+    consultorModalRef(component: Component, consultor: Consultor): NgbModalRef {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
-        modalRef.componentInstance.consultores = consultores;
+        modalRef.componentInstance.consultor = consultor;
         modalRef.result.then((result) => {
             this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true });
             this.ngbModalRef = null;

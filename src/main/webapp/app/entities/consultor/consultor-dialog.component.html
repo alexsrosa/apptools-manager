@@ -1,21 +1,21 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myConsultoresLabel">Create or edit a Consultores</h4>
+        <h4 class="modal-title" id="myConsultorLabel">Create or edit a Consultor</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!consultores.id">
+        <div class="form-group" [hidden]="!consultor.id">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="consultores.id" readonly />
+                   [(ngModel)]="consultor.id" readonly />
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_nome">Nome</label>
             <input type="text" class="form-control" name="nome" id="field_nome"
-                [(ngModel)]="consultores.nome" required />
+                [(ngModel)]="consultor.nome" required />
             <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.nome?.errors?.required">
@@ -26,7 +26,7 @@
         <div class="form-group">
             <label class="form-control-label" for="field_dataprimeiroregistro">Dataprimeiroregistro</label>
             <div class="input-group">
-                <input id="field_dataprimeiroregistro" type="text" class="form-control" name="dataprimeiroregistro" ngbDatepicker  #dataprimeiroregistroDp="ngbDatepicker" [(ngModel)]="consultores.dataprimeiroregistro"
+                <input id="field_dataprimeiroregistro" type="text" class="form-control" name="dataprimeiroregistro" ngbDatepicker  #dataprimeiroregistroDp="ngbDatepicker" [(ngModel)]="consultor.dataprimeiroregistro"
                 required/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" (click)="dataprimeiroregistroDp.toggle()"><i class="fa fa-calendar"></i></button>
@@ -42,7 +42,7 @@
         <div class="form-group">
             <label class="form-control-label" for="field_dataultimoregistro">Dataultimoregistro</label>
             <div class="input-group">
-                <input id="field_dataultimoregistro" type="text" class="form-control" name="dataultimoregistro" ngbDatepicker  #dataultimoregistroDp="ngbDatepicker" [(ngModel)]="consultores.dataultimoregistro"
+                <input id="field_dataultimoregistro" type="text" class="form-control" name="dataultimoregistro" ngbDatepicker  #dataultimoregistroDp="ngbDatepicker" [(ngModel)]="consultor.dataultimoregistro"
                 required/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" (click)="dataultimoregistroDp.toggle()"><i class="fa fa-calendar"></i></button>
@@ -51,6 +51,19 @@
             <div [hidden]="!(editForm.controls.dataultimoregistro?.dirty && editForm.controls.dataultimoregistro?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.dataultimoregistro?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_flativo">Flativo</label>
+            <select class="form-control" name="flativo" [(ngModel)]="consultor.flativo" id="field_flativo"  required>
+                <option value="ATIVADO">ATIVADO</option>
+                <option value="DESATIVADO">DESATIVADO</option>
+            </select>
+            <div [hidden]="!(editForm.controls.flativo?.dirty && editForm.controls.flativo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.flativo?.errors?.required">
                    This field is required.
                 </small>
             </div>

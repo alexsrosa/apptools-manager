@@ -7,17 +7,18 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import br.com.tools.manager.domain.enumeration.ConsultorStatus;
+
 /**
- * A Consultores.
+ * A Consultor.
  */
 @Entity
-@Table(name = "consultores")
-public class Consultores implements Serializable {
+@Table(name = "consultor")
+public class Consultor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -32,6 +33,11 @@ public class Consultores implements Serializable {
     @Column(name = "dataultimoregistro", nullable = false)
     private LocalDate dataultimoregistro;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "flativo", nullable = false)
+    private ConsultorStatus flativo;
+
     public Long getId() {
         return id;
     }
@@ -44,7 +50,7 @@ public class Consultores implements Serializable {
         return nome;
     }
 
-    public Consultores nome(String nome) {
+    public Consultor nome(String nome) {
         this.nome = nome;
         return this;
     }
@@ -57,7 +63,7 @@ public class Consultores implements Serializable {
         return dataprimeiroregistro;
     }
 
-    public Consultores dataprimeiroregistro(LocalDate dataprimeiroregistro) {
+    public Consultor dataprimeiroregistro(LocalDate dataprimeiroregistro) {
         this.dataprimeiroregistro = dataprimeiroregistro;
         return this;
     }
@@ -70,13 +76,26 @@ public class Consultores implements Serializable {
         return dataultimoregistro;
     }
 
-    public Consultores dataultimoregistro(LocalDate dataultimoregistro) {
+    public Consultor dataultimoregistro(LocalDate dataultimoregistro) {
         this.dataultimoregistro = dataultimoregistro;
         return this;
     }
 
     public void setDataultimoregistro(LocalDate dataultimoregistro) {
         this.dataultimoregistro = dataultimoregistro;
+    }
+
+    public ConsultorStatus getFlativo() {
+        return flativo;
+    }
+
+    public Consultor flativo(ConsultorStatus flativo) {
+        this.flativo = flativo;
+        return this;
+    }
+
+    public void setFlativo(ConsultorStatus flativo) {
+        this.flativo = flativo;
     }
 
     @Override
@@ -87,11 +106,11 @@ public class Consultores implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Consultores consultores = (Consultores) o;
-        if (consultores.getId() == null || getId() == null) {
+        Consultor consultor = (Consultor) o;
+        if (consultor.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), consultores.getId());
+        return Objects.equals(getId(), consultor.getId());
     }
 
     @Override
@@ -101,11 +120,12 @@ public class Consultores implements Serializable {
 
     @Override
     public String toString() {
-        return "Consultores{" +
+        return "Consultor{" +
             "id=" + getId() +
             ", nome='" + getNome() + "'" +
             ", dataprimeiroregistro='" + getDataprimeiroregistro() + "'" +
             ", dataultimoregistro='" + getDataultimoregistro() + "'" +
+            ", flativo='" + getFlativo() + "'" +
             "}";
     }
 }

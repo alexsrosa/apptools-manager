@@ -22,10 +22,18 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "flativo",
+            "fieldType": "ConsultorStatus",
+            "fieldValues": "ATIVADO,DESATIVADO",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
-    "changelogDate": "20170823234226",
-    "entityTableName": "consultores",
+    "changelogDate": "20170825230921",
+    "entityTableName": "consultor",
     "dto": "no",
     "pagination": "pagination",
     "service": "no"

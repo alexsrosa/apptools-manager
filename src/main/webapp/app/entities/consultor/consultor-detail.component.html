@@ -1,20 +1,24 @@
 
-<div *ngIf="consultores">
-    <h2><span>Consultores</span> {{consultores.id}}</h2>
+<div *ngIf="consultor">
+    <h2><span>Consultor</span> {{consultor.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <dt><span>Nome</span></dt>
         <dd>
-            <span>{{consultores.nome}}</span>
+            <span>{{consultor.nome}}</span>
         </dd>
         <dt><span>Dataprimeiroregistro</span></dt>
         <dd>
-            <span>{{consultores.dataprimeiroregistro | date:'mediumDate'}}</span>
+            <span>{{consultor.dataprimeiroregistro | date:'mediumDate'}}</span>
         </dd>
         <dt><span>Dataultimoregistro</span></dt>
         <dd>
-            <span>{{consultores.dataultimoregistro | date:'mediumDate'}}</span>
+            <span>{{consultor.dataultimoregistro | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Flativo</span></dt>
+        <dd>
+            <span>{{consultor.flativo}}</span>
         </dd>
     </dl>
 
@@ -25,7 +29,7 @@
     </button>
 
     <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'consultores/'+ consultores.id + '/edit'} }]"
+            [routerLink]="['/', { outlets: { popup: 'consultor/'+ consultor.id + '/edit'} }]"
             replaceUrl="true"
             class="btn btn-primary">
         <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>

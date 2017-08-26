@@ -1,10 +1,10 @@
 <div>
     <h2>
-        <span>Consultores</span>
-        <button class="btn btn-primary float-right jh-create-entity create-consultores" [routerLink]="['/', { outlets: { popup: ['consultores-new'] } }]">
+        <span>Consultors</span>
+        <button class="btn btn-primary float-right jh-create-entity create-consultor" [routerLink]="['/', { outlets: { popup: ['consultor-new'] } }]">
             <span class="fa fa-plus"></span>
             <span >
-            Create new Consultores
+            Create new Consultor
             </span>
         </button>
     </h2>
@@ -12,7 +12,7 @@
     <div class="row">
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="consultores">
+    <div class="table-responsive" *ngIf="consultors">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -20,32 +20,34 @@
             <th jhiSortBy="nome"><span>Nome</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dataprimeiroregistro"><span>Dataprimeiroregistro</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dataultimoregistro"><span>Dataultimoregistro</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="flativo"><span>Flativo</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let consultores of consultores ;trackBy: trackId">
-                <td><a [routerLink]="['../consultores', consultores.id ]">{{consultores.id}}</a></td>
-                <td>{{consultores.nome}}</td>
-                <td>{{consultores.dataprimeiroregistro | date:'mediumDate'}}</td>
-                <td>{{consultores.dataultimoregistro | date:'mediumDate'}}</td>
+            <tr *ngFor="let consultor of consultors ;trackBy: trackId">
+                <td><a [routerLink]="['../consultor', consultor.id ]">{{consultor.id}}</a></td>
+                <td>{{consultor.nome}}</td>
+                <td>{{consultor.dataprimeiroregistro | date:'mediumDate'}}</td>
+                <td>{{consultor.dataultimoregistro | date:'mediumDate'}}</td>
+                <td>{{consultor.flativo}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../consultores', consultores.id ]"
+                                [routerLink]="['../consultor', consultor.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="hidden-md-down">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'consultores/'+ consultores.id + '/edit'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'consultor/'+ consultor.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="hidden-md-down">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'consultores/'+ consultores.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'consultor/'+ consultor.id + '/delete'} }]"
                                 replaceUrl="true"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>
@@ -57,7 +59,7 @@
             </tbody>
         </table>
     </div>
-        <div *ngIf="consultores && consultores.length">
+        <div *ngIf="consultors && consultors.length">
             <div class="row justify-content-center">
                 <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
             </div>

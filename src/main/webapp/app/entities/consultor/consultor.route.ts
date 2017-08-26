@@ -4,13 +4,13 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes, CanActiva
 import { UserRouteAccessService } from '../../shared';
 import { JhiPaginationUtil } from 'ng-jhipster';
 
-import { ConsultoresComponent } from './consultores.component';
-import { ConsultoresDetailComponent } from './consultores-detail.component';
-import { ConsultoresPopupComponent } from './consultores-dialog.component';
-import { ConsultoresDeletePopupComponent } from './consultores-delete-dialog.component';
+import { ConsultorComponent } from './consultor.component';
+import { ConsultorDetailComponent } from './consultor-detail.component';
+import { ConsultorPopupComponent } from './consultor-dialog.component';
+import { ConsultorDeletePopupComponent } from './consultor-delete-dialog.component';
 
 @Injectable()
-export class ConsultoresResolvePagingParams implements Resolve<any> {
+export class ConsultorResolvePagingParams implements Resolve<any> {
 
     constructor(private paginationUtil: JhiPaginationUtil) {}
 
@@ -25,56 +25,56 @@ export class ConsultoresResolvePagingParams implements Resolve<any> {
     }
 }
 
-export const consultoresRoute: Routes = [
+export const consultorRoute: Routes = [
     {
-        path: 'consultores',
-        component: ConsultoresComponent,
+        path: 'consultor',
+        component: ConsultorComponent,
         resolve: {
-            'pagingParams': ConsultoresResolvePagingParams
+            'pagingParams': ConsultorResolvePagingParams
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Consultores'
+            pageTitle: 'Consultors'
         },
         canActivate: [UserRouteAccessService]
     }, {
-        path: 'consultores/:id',
-        component: ConsultoresDetailComponent,
+        path: 'consultor/:id',
+        component: ConsultorDetailComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Consultores'
+            pageTitle: 'Consultors'
         },
         canActivate: [UserRouteAccessService]
     }
 ];
 
-export const consultoresPopupRoute: Routes = [
+export const consultorPopupRoute: Routes = [
     {
-        path: 'consultores-new',
-        component: ConsultoresPopupComponent,
+        path: 'consultor-new',
+        component: ConsultorPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Consultores'
+            pageTitle: 'Consultors'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
-        path: 'consultores/:id/edit',
-        component: ConsultoresPopupComponent,
+        path: 'consultor/:id/edit',
+        component: ConsultorPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Consultores'
+            pageTitle: 'Consultors'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
-        path: 'consultores/:id/delete',
-        component: ConsultoresDeletePopupComponent,
+        path: 'consultor/:id/delete',
+        component: ConsultorDeletePopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Consultores'
+            pageTitle: 'Consultors'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

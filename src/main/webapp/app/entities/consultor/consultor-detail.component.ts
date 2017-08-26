@@ -3,22 +3,22 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager  } from 'ng-jhipster';
 
-import { Consultores } from './consultores.model';
-import { ConsultoresService } from './consultores.service';
+import { Consultor } from './consultor.model';
+import { ConsultorService } from './consultor.service';
 
 @Component({
-    selector: 'jhi-consultores-detail',
-    templateUrl: './consultores-detail.component.html'
+    selector: 'jhi-consultor-detail',
+    templateUrl: './consultor-detail.component.html'
 })
-export class ConsultoresDetailComponent implements OnInit, OnDestroy {
+export class ConsultorDetailComponent implements OnInit, OnDestroy {
 
-    consultores: Consultores;
+    consultor: Consultor;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
     constructor(
         private eventManager: JhiEventManager,
-        private consultoresService: ConsultoresService,
+        private consultorService: ConsultorService,
         private route: ActivatedRoute
     ) {
     }
@@ -27,12 +27,12 @@ export class ConsultoresDetailComponent implements OnInit, OnDestroy {
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
         });
-        this.registerChangeInConsultores();
+        this.registerChangeInConsultors();
     }
 
     load(id) {
-        this.consultoresService.find(id).subscribe((consultores) => {
-            this.consultores = consultores;
+        this.consultorService.find(id).subscribe((consultor) => {
+            this.consultor = consultor;
         });
     }
     previousState() {
@@ -44,10 +44,10 @@ export class ConsultoresDetailComponent implements OnInit, OnDestroy {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    registerChangeInConsultores() {
+    registerChangeInConsultors() {
         this.eventSubscriber = this.eventManager.subscribe(
-            'consultoresListModification',
-            (response) => this.load(this.consultores.id)
+            'consultorListModification',
+            (response) => this.load(this.consultor.id)
         );
     }
 }

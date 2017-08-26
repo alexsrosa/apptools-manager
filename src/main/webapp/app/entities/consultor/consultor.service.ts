@@ -3,18 +3,18 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { JhiDateUtils } from 'ng-jhipster';
 
-import { Consultores } from './consultores.model';
+import { Consultor } from './consultor.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
 @Injectable()
-export class ConsultoresService {
+export class ConsultorService {
 
-    private resourceUrl = 'api/consultores';
+    private resourceUrl = 'api/consultors';
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
-    create(consultores: Consultores): Observable<Consultores> {
-        const copy = this.convert(consultores);
+    create(consultor: Consultor): Observable<Consultor> {
+        const copy = this.convert(consultor);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
             this.convertItemFromServer(jsonResponse);
@@ -22,8 +22,8 @@ export class ConsultoresService {
         });
     }
 
-    update(consultores: Consultores): Observable<Consultores> {
-        const copy = this.convert(consultores);
+    update(consultor: Consultor): Observable<Consultor> {
+        const copy = this.convert(consultor);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
             this.convertItemFromServer(jsonResponse);
@@ -31,7 +31,7 @@ export class ConsultoresService {
         });
     }
 
-    find(id: number): Observable<Consultores> {
+    find(id: number): Observable<Consultor> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             this.convertItemFromServer(jsonResponse);
@@ -64,12 +64,12 @@ export class ConsultoresService {
             .convertLocalDateFromServer(entity.dataultimoregistro);
     }
 
-    private convert(consultores: Consultores): Consultores {
-        const copy: Consultores = Object.assign({}, consultores);
+    private convert(consultor: Consultor): Consultor {
+        const copy: Consultor = Object.assign({}, consultor);
         copy.dataprimeiroregistro = this.dateUtils
-            .convertLocalDateToServer(consultores.dataprimeiroregistro);
+            .convertLocalDateToServer(consultor.dataprimeiroregistro);
         copy.dataultimoregistro = this.dateUtils
-            .convertLocalDateToServer(consultores.dataultimoregistro);
+            .convertLocalDateToServer(consultor.dataultimoregistro);
         return copy;
     }
 }

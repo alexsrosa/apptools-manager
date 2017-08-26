@@ -15,10 +15,10 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Consultores.
+        Added the entity Consultor.
     -->
-    <changeSet id="20170823234226-1" author="jhipster">
-        <createTable tableName="consultores">
+    <changeSet id="20170825230921-1" author="jhipster">
+        <createTable tableName="consultor">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -31,6 +31,10 @@
             </column>
 
             <column name="dataultimoregistro" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="flativo" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
 

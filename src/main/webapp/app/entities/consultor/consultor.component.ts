@@ -3,19 +3,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiAlertService } from 'ng-jhipster';
 
-import { Consultores } from './consultores.model';
-import { ConsultoresService } from './consultores.service';
+import { Consultor } from './consultor.model';
+import { ConsultorService } from './consultor.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
-    selector: 'jhi-consultores',
-    templateUrl: './consultores.component.html'
+    selector: 'jhi-consultor',
+    templateUrl: './consultor.component.html'
 })
-export class ConsultoresComponent implements OnInit, OnDestroy {
+export class ConsultorComponent implements OnInit, OnDestroy {
 
 currentAccount: any;
-    consultores: Consultores[];
+    consultors: Consultor[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -30,7 +30,7 @@ currentAccount: any;
     reverse: any;
 
     constructor(
-        private consultoresService: ConsultoresService,
+        private consultorService: ConsultorService,
         private parseLinks: JhiParseLinks,
         private alertService: JhiAlertService,
         private principal: Principal,
@@ -50,7 +50,7 @@ currentAccount: any;
     }
 
     loadAll() {
-        this.consultoresService.query({
+        this.consultorService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(
@@ -65,7 +65,7 @@ currentAccount: any;
         }
     }
     transition() {
-        this.router.navigate(['/consultores'], {queryParams:
+        this.router.navigate(['/consultor'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -77,7 +77,7 @@ currentAccount: any;
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/consultores', {
+        this.router.navigate(['/consultor', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
@@ -88,18 +88,18 @@ currentAccount: any;
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.registerChangeInConsultores();
+        this.registerChangeInConsultors();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: Consultores) {
+    trackId(index: number, item: Consultor) {
         return item.id;
     }
-    registerChangeInConsultores() {
-        this.eventSubscriber = this.eventManager.subscribe('consultoresListModification', (response) => this.loadAll());
+    registerChangeInConsultors() {
+        this.eventSubscriber = this.eventManager.subscribe('consultorListModification', (response) => this.loadAll());
     }
 
     sort() {
@@ -115,7 +115,7 @@ currentAccount: any;
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.consultores = data;
+        this.consultors = data;
     }
     private onError(error) {
         this.alertService.error(error.message, null, null);

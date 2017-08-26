@@ -6,17 +6,17 @@ import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
-import { Consultores } from './consultores.model';
-import { ConsultoresPopupService } from './consultores-popup.service';
-import { ConsultoresService } from './consultores.service';
+import { Consultor } from './consultor.model';
+import { ConsultorPopupService } from './consultor-popup.service';
+import { ConsultorService } from './consultor.service';
 
 @Component({
-    selector: 'jhi-consultores-dialog',
-    templateUrl: './consultores-dialog.component.html'
+    selector: 'jhi-consultor-dialog',
+    templateUrl: './consultor-dialog.component.html'
 })
-export class ConsultoresDialogComponent implements OnInit {
+export class ConsultorDialogComponent implements OnInit {
 
-    consultores: Consultores;
+    consultor: Consultor;
     isSaving: boolean;
     dataprimeiroregistroDp: any;
     dataultimoregistroDp: any;
@@ -24,7 +24,7 @@ export class ConsultoresDialogComponent implements OnInit {
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
-        private consultoresService: ConsultoresService,
+        private consultorService: ConsultorService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -39,22 +39,22 @@ export class ConsultoresDialogComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        if (this.consultores.id !== undefined) {
+        if (this.consultor.id !== undefined) {
             this.subscribeToSaveResponse(
-                this.consultoresService.update(this.consultores));
+                this.consultorService.update(this.consultor));
         } else {
             this.subscribeToSaveResponse(
-                this.consultoresService.create(this.consultores));
+                this.consultorService.create(this.consultor));
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<Consultores>) {
-        result.subscribe((res: Consultores) =>
+    private subscribeToSaveResponse(result: Observable<Consultor>) {
+        result.subscribe((res: Consultor) =>
             this.onSaveSuccess(res), (res: Response) => this.onSaveError(res));
     }
 
-    private onSaveSuccess(result: Consultores) {
-        this.eventManager.broadcast({ name: 'consultoresListModification', content: 'OK'});
+    private onSaveSuccess(result: Consultor) {
+        this.eventManager.broadcast({ name: 'consultorListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -75,26 +75,26 @@ export class ConsultoresDialogComponent implements OnInit {
 }
 
 @Component({
-    selector: 'jhi-consultores-popup',
+    selector: 'jhi-consultor-popup',
     template: ''
 })
-export class ConsultoresPopupComponent implements OnInit, OnDestroy {
+export class ConsultorPopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
 
     constructor(
         private route: ActivatedRoute,
-        private consultoresPopupService: ConsultoresPopupService
+        private consultorPopupService: ConsultorPopupService
     ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             if ( params['id'] ) {
-                this.consultoresPopupService
-                    .open(ConsultoresDialogComponent as Component, params['id']);
+                this.consultorPopupService
+                    .open(ConsultorDialogComponent as Component, params['id']);
             } else {
-                this.consultoresPopupService
-                    .open(ConsultoresDialogComponent as Component);
+                this.consultorPopupService
+                    .open(ConsultorDialogComponent as Component);
             }
         });
     }
